@@ -1,0 +1,538 @@
+<title>Kesh</title>
+<style>
+  :root {
+    --ground: #0e1110;
+    --surface: #171b1a;
+    --surface-2: #1d2220;
+    --border: #2a302d;
+    --text: #eae7df;
+    --muted: #8a938d;
+    --accent: #c98a4b;
+    --accent-dim: #8a5f36;
+    --ok: #7ea672;
+    --paused: #9a8a6a;
+    --radius: 5px;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --ground: #f2f0e9;
+      --surface: #ffffff;
+      --surface-2: #ece9e0;
+      --border: #d9d4c6;
+      --text: #1b1e1c;
+      --muted: #666f68;
+      --accent: #a3652f;
+      --accent-dim: #c99a6b;
+      --ok: #4c7642;
+      --paused: #8a7a52;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0e1110;
+    --surface: #171b1a;
+    --surface-2: #1d2220;
+    --border: #2a302d;
+    --text: #eae7df;
+    --muted: #8a938d;
+    --accent: #c98a4b;
+    --accent-dim: #8a5f36;
+    --ok: #7ea672;
+    --paused: #9a8a6a;
+  }
+
+  :root[data-theme="light"] {
+    --ground: #f2f0e9;
+    --surface: #ffffff;
+    --surface-2: #ece9e0;
+    --border: #d9d4c6;
+    --text: #1b1e1c;
+    --muted: #666f68;
+    --accent: #a3652f;
+    --accent-dim: #c99a6b;
+    --ok: #4c7642;
+    --paused: #8a7a52;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+    background-size: 28px 28px;
+    background-color: var(--ground);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible, .copy-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- status bar ---- */
+  .statusbar {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--ground) 88%, var(--surface));
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .statusbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .statusbar-left { display: flex; align-items: center; gap: 0.6rem; }
+  .cursor {
+    display: inline-block;
+    width: 7px; height: 14px;
+    background: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+    vertical-align: -2px;
+  }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; opacity: .6; } }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.22rem 0.65rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text);
+    background: var(--surface);
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); position: relative; flex: none; }
+  .dot::after {
+    content: ""; position: absolute; inset: -4px; border-radius: 50%;
+    border: 1px solid var(--ok); opacity: 0.6;
+    animation: ping 2.2s ease-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) { .dot::after { animation: none; display: none; } }
+  @keyframes ping {
+    0% { transform: scale(0.6); opacity: 0.6; }
+    100% { transform: scale(2.1); opacity: 0; }
+  }
+
+  .nav { display: flex; gap: 1.1rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--text); }
+
+  .theme-toggle {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.2rem 0.55rem;
+    cursor: pointer;
+    transition: transform 160ms ease-out, color 160ms ease;
+  }
+  .theme-toggle:active { transform: scale(0.95); }
+  .theme-toggle:hover { color: var(--text); }
+
+  /* ---- hero ---- */
+  .hero { padding: 5.5rem 0 4rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(2.3rem, 6vw, 4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    margin: 0 0 1.1rem;
+    text-wrap: balance;
+  }
+  .hero-line {
+    max-width: 46ch;
+    color: var(--muted);
+    font-size: 1.08rem;
+    margin: 0 0 2rem;
+  }
+  #typed { border-right: 2px solid transparent; }
+  #typed.typing { border-right-color: var(--accent); }
+  .prompt { color: var(--accent); margin-right: 0.4rem; }
+
+  .cta-row { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.55rem 0.95rem;
+    background: var(--surface);
+    transition: transform 160ms ease-out, border-color 160ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn:hover { border-color: var(--accent-dim); }
+  .btn.primary { border-color: var(--accent); color: var(--accent); }
+
+  /* ---- sections ---- */
+  section { padding: 3.2rem 0; border-top: 1px solid var(--border); }
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 1.6rem; gap: 1rem; flex-wrap: wrap;
+  }
+  h2 {
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  h2 .idx { color: var(--muted); font-weight: 400; margin-right: 0.6rem; }
+  .trace {
+    height: 1px;
+    background: var(--border);
+    flex: 1;
+    max-width: 140px;
+    position: relative;
+    overflow: hidden;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 900ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .trace.visible { clip-path: inset(0 0 0 0); }
+  .trace::after { content: ""; position: absolute; inset: 0; background: var(--accent-dim); }
+
+  /* ---- about ---- */
+  .about p { max-width: 65ch; color: var(--text); }
+  .about p.muted { color: var(--muted); }
+  blockquote {
+    margin: 1.8rem 0;
+    padding: 0.9rem 0 0.9rem 1.1rem;
+    border-left: 2px solid var(--accent);
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: var(--text);
+    max-width: 52ch;
+  }
+
+  /* ---- projects ---- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.35rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 420ms cubic-bezier(0.23,1,0.32,1), transform 420ms cubic-bezier(0.23,1,0.32,1);
+  }
+  .card.visible { opacity: 1; transform: translateY(0); }
+  .card.span-2 { grid-column: span 2; }
+
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.6rem; }
+  .card-title { font-family: var(--mono); font-size: 1rem; margin: 0; }
+  .status {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.04em;
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    color: var(--muted); white-space: nowrap; padding-top: 0.15rem;
+  }
+  .status .sdot { width: 5px; height: 5px; border-radius: 50%; background: var(--ok); }
+
+  .card p.desc { margin: 0 0 0.9rem; color: var(--muted); font-size: 0.94rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.9rem; }
+  .tag {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 3px; padding: 0.15rem 0.45rem;
+  }
+  .card-link { font-family: var(--mono); font-size: 0.82rem; text-decoration: none; }
+  .card-link:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .card.span-2 { grid-column: span 1; }
+  }
+
+  /* ---- stack ---- */
+  .conf {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.4rem;
+    overflow-x: auto;
+  }
+  .conf-row { white-space: nowrap; margin: 0 0 0.55rem; }
+  .conf-row:last-child { margin-bottom: 0; }
+  .conf-key { color: var(--accent); }
+  .conf-val { color: var(--muted); }
+  .cert-earned { color: var(--ok); }
+  .cert-progress { color: var(--paused); }
+
+  /* ---- contact ---- */
+  .contact-row { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.2rem; }
+  .copy-btn {
+    font-family: var(--mono); font-size: 0.85rem; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 0.55rem 0.95rem; cursor: pointer;
+    transition: transform 160ms ease-out, border-color 160ms ease;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    text-decoration: none;
+  }
+  .copy-btn:active { transform: scale(0.97); }
+  .copy-btn .swap { display: inline-block; transition: opacity 180ms ease, filter 180ms ease; }
+  .copy-btn.copied .swap.default { display: none; }
+  .copy-btn .swap.confirm { display: none; color: var(--ok); }
+  .copy-btn.copied .swap.confirm { display: inline-block; }
+
+  footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--border); }
+  footer p { color: var(--muted); font-size: 0.85rem; font-family: var(--mono); }
+</style>
+
+<div class="statusbar">
+  <div class="wrap statusbar-inner">
+    <div class="statusbar-left">
+      <span>kesh://portfolio</span><span class="cursor"></span>
+      <span class="pill"><span class="dot"></span>open to 2026/27 internships</span>
+    </div>
+    <nav class="nav">
+      <a href="#work">work</a>
+      <a href="#stack">stack</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button">theme: auto</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero" aria-label="Introduction">
+    <span class="eyebrow">~/kesh · uw informatics, senior</span>
+    <h1>I build what I actually needed.</h1>
+    <p class="hero-line"><span class="prompt">$ whoami →</span><span id="typed"></span></p>
+    <div class="cta-row">
+      <a class="btn primary" href="mailto:keshm@uw.edu">email</a>
+      <a class="btn" href="https://linkedin.com/in/ukeshwaran" target="_blank" rel="noopener">linkedin</a>
+      <a class="btn" href="https://github.com/keshm2" target="_blank" rel="noopener">github</a>
+    </div>
+  </section>
+
+  <section class="about" aria-label="About">
+    <div class="section-head">
+      <h2><span class="idx">01</span>about</h2>
+      <div class="trace" data-reveal></div>
+    </div>
+    <p>I'm a senior Informatics student at the University of Washington, minoring in Data Science, focused on cloud infrastructure, network engineering, and cybersecurity, plus backend, QA, IT/systems, and a bit of frontend on the security side.</p>
+    <p class="muted">Most of what I build starts from something I actually wanted, not a tutorial I followed. I got tired of copy-pasting the same resume into every application, so I built aplyx. It runs on top of whatever coding agent I already have open, applies to postings on its own, and pings me on Discord when one goes through. I wanted to ask questions about my own PDFs instead of scrolling through them, so I built Kyper one weekend messing around with Llama 3 and embeddings. ben, a Discord bot, handles chore reminders for about 50 students now, and HusKey Manager, a password vault I built for UW's INFO 310 cybersecurity course, exists mostly because I wanted to see, hands-on, how authentication and access control actually break.</p>
+    <p class="muted">I also help run the technical side of UW's Kappa Theta Pi chapter, which is where UW KTP below came from.</p>
+    <blockquote>Before I was making these tools, I was the user hoping one already existed.</blockquote>
+  </section>
+
+  <section id="work" aria-label="Featured work">
+    <div class="section-head">
+      <h2><span class="idx">02</span>featured work</h2>
+      <div class="trace" data-reveal></div>
+    </div>
+    <div class="grid">
+
+      <article class="card span-2" data-reveal>
+        <div class="card-top">
+          <h3 class="card-title">aplyx</h3>
+          <span class="status"><span class="sdot"></span>active</span>
+        </div>
+        <p class="desc">A local-first job application agent that runs on top of a coding agent you already have installed (opencode or Claude Code get full capability). It searches boards like Ashby, Lever, Greenhouse, and Workday, skips anything already seen, tailors a resume and cover letter per posting, applies, pings Discord with the outcome, and logs every success to a Google Sheet. aplyx is the workflow; the agent is the executor.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Rust</span><span class="tag">PostgreSQL</span>
+        </div>
+        <a class="card-link" href="https://github.com/keshm2/aplyx" target="_blank" rel="noopener">→ view source</a>
+      </article>
+
+      <article class="card span-2" data-reveal>
+        <div class="card-top">
+          <h3 class="card-title">UW KTP</h3>
+          <span class="status"><span class="sdot"></span>active</span>
+        </div>
+        <p class="desc">The chapter-management platform for Kappa Theta Pi's UW chapter, recently transferred into the chapter's own GitHub org to become its actual system of record. A public rush site, a member portal, and an admin console, with the goal of automating due collection through Stripe (or another processor), tracking attendance to push it up, budgeting the year automatically from what actually gets collected, and keeping member points and absences in one place instead of a spreadsheet. Currently a working front-end demo with mock data and a Stripe-style mock checkout. The real backend is next.</p>
+        <div class="tags">
+          <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span>
+        </div>
+        <a class="card-link" href="https://github.com/UW-KTP/peaka-theta-pi" target="_blank" rel="noopener">→ view source</a>
+        &nbsp;&nbsp;<a class="card-link" href="https://uw-ktp.github.io/peaka-theta-pi/" target="_blank" rel="noopener">→ live demo</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card-top">
+          <h3 class="card-title">kyper</h3>
+          <span class="status"><span class="sdot"></span>maintained</span>
+        </div>
+        <p class="desc">Started as messing around with Llama 3, Ollama, and document embeddings. Now it's how I ask questions about my own PDFs instead of scrolling through them. Runs fully offline, nothing leaves the machine.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Ollama</span><span class="tag">RAG</span>
+        </div>
+        <a class="card-link" href="https://github.com/keshm2/kyper" target="_blank" rel="noopener">→ view source</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card-top">
+          <h3 class="card-title">HusKey Manager</h3>
+          <span class="status"><span class="sdot"></span>maintained</span>
+        </div>
+        <p class="desc">A team password vault built for UW's INFO 310 cybersecurity course, with intentionally vulnerable code so students can find and fix real security bugs in authentication, role permissions, and access control.</p>
+        <div class="tags">
+          <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Docker</span>
+        </div>
+        <a class="card-link" href="https://github.com/keshm2/passwordmanager" target="_blank" rel="noopener">→ view source</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card-top">
+          <h3 class="card-title">bots</h3>
+          <span class="status"><span class="sdot"></span>active</span>
+        </div>
+        <p class="desc">General-purpose Discord bots, korrupt and pika among them, for moderation commands and music playback in voice channels.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Discord API</span><span class="tag">SQLite</span>
+        </div>
+        <a class="card-link" href="https://github.com/keshm2/bots" target="_blank" rel="noopener">→ view source</a>
+      </article>
+
+      <article class="card" data-reveal>
+        <div class="card-top">
+          <h3 class="card-title">ben</h3>
+          <span class="status"><span class="sdot"></span>active · 50 users</span>
+        </div>
+        <p class="desc">Kept separate from the general-purpose bots because it does one real job: chore reminders, in daily use by about 50 students.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Discord API</span></div>
+        <a class="card-link" href="https://github.com/keshm2/bots" target="_blank" rel="noopener">→ view source</a>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="stack" aria-label="Tech stack">
+    <div class="section-head">
+      <h2><span class="idx">03</span>stack</h2>
+      <div class="trace" data-reveal></div>
+    </div>
+    <div class="conf">
+      <p class="conf-row"><span class="conf-key">languages</span><span class="conf-val">: Python, TypeScript, JavaScript, Rust, C++, PHP, R</span></p>
+      <p class="conf-row"><span class="conf-key">frameworks_data</span><span class="conf-val">: React, Flask, PostgreSQL, MySQL, SQLite, REST APIs</span></p>
+      <p class="conf-row"><span class="conf-key">ai_ml</span><span class="conf-val">: Ollama, Jupyter, RAG</span></p>
+      <p class="conf-row"><span class="conf-key">security</span><span class="conf-val">: OWASP Top 10, RBAC</span></p>
+      <p class="conf-row"><span class="conf-key">networking</span><span class="conf-val">: TCP/IP, Routing &amp; Switching, Subnetting, DNS &amp; DHCP, Wireshark</span></p>
+      <p class="conf-row"><span class="conf-key">tools</span><span class="conf-val">: Git, Docker, Linux, Playwright, VS Code</span></p>
+      <p class="conf-row"><span class="conf-key">certifications</span><span class="conf-val">: <span class="cert-earned">CCNA</span> (earned), <span class="cert-progress">Security+</span> (in progress)</span></p>
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Contact">
+    <div class="section-head">
+      <h2><span class="idx">04</span>contact</h2>
+      <div class="trace" data-reveal></div>
+    </div>
+    <p class="muted" style="max-width:52ch">If you're hiring, or just want to connect and network, please reach out. Best way is email :)</p>
+    <div class="contact-row">
+      <a class="copy-btn" id="copyEmail" href="mailto:keshm@uw.edu">
+        <span class="swap default">keshm@uw.edu · copy</span>
+        <span class="swap confirm">copied ✓</span>
+      </a>
+      <a class="btn" href="https://linkedin.com/in/ukeshwaran" target="_blank" rel="noopener">linkedin ↗</a>
+      <a class="btn" href="https://github.com/keshm2" target="_blank" rel="noopener">github ↗</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>kesh · built by hand, not a template</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // theme toggle
+  var root = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  var stored = localStorage.getItem('theme');
+  if (stored) { root.setAttribute('data-theme', stored); btn.textContent = 'theme: ' + stored; }
+  btn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : current === 'light' ? null : 'dark';
+    if (next) { root.setAttribute('data-theme', next); localStorage.setItem('theme', next); btn.textContent = 'theme: ' + next; }
+    else { root.removeAttribute('data-theme'); localStorage.removeItem('theme'); btn.textContent = 'theme: auto'; }
+  });
+
+  // typed hero line
+  var typedEl = document.getElementById('typed');
+  var full = "cloud infra, networks, security, plus full-stack work on aplyx and a password vault built to get hacked on purpose.";
+  if (reduced) {
+    typedEl.textContent = full;
+  } else {
+    var i = 0;
+    typedEl.classList.add('typing');
+    (function tick() {
+      typedEl.textContent = full.slice(0, i);
+      i++;
+      if (i <= full.length) {
+        setTimeout(tick, 18);
+      } else {
+        setTimeout(function () { typedEl.classList.remove('typing'); }, 600);
+      }
+    })();
+  }
+
+  // scroll reveal
+  var targets = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, idx) {
+        if (entry.isIntersecting) {
+          setTimeout(function () { entry.target.classList.add('visible'); }, idx * 50);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function (t) { io.observe(t); });
+  } else {
+    targets.forEach(function (t) { t.classList.add('visible'); });
+  }
+
+  // email link: mailto always works via the href; clipboard copy is a best-effort bonus
+  var copyBtn = document.getElementById('copyEmail');
+  copyBtn.addEventListener('click', function () {
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText('keshm@uw.edu').then(function () {
+      copyBtn.classList.add('copied');
+      setTimeout(function () { copyBtn.classList.remove('copied'); }, 1600);
+    }).catch(function () {});
+  });
+})();
+</script>
