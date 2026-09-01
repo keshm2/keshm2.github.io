@@ -1,4 +1,110 @@
-<title>Kesh</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kesh Muthu — Cloud, Networking &amp; Security Engineer | UW Informatics</title>
+<meta name="description" content="Kesh Muthu is a University of Washington Informatics senior in Seattle focused on cloud infrastructure, network engineering, and cybersecurity, plus full-stack and QA work. Builder of aplyx. Open to 2026/2027 internships and 2027 new-grad roles.">
+<link rel="canonical" href="https://keshm2.github.io/">
+<meta name="author" content="Kesh Muthu">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0e1110" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f0e9" media="(prefers-color-scheme: light)">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kesh Muthu">
+<meta property="og:title" content="Kesh Muthu — Cloud, Networking &amp; Security Engineer">
+<meta property="og:description" content="UW Informatics senior in Seattle focused on cloud infra, networks, and security. Builder of aplyx. Open to 2026/2027 internships and 2027 new-grad roles.">
+<meta property="og:url" content="https://keshm2.github.io/">
+<meta property="og:image" content="https://keshm2.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kesh Muthu — portfolio: cloud infrastructure, networks, and security">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kesh Muthu — Cloud, Networking &amp; Security Engineer">
+<meta name="twitter:description" content="UW Informatics senior in Seattle. Cloud infra, networks, security. Builder of aplyx.">
+<meta name="twitter:image" content="https://keshm2.github.io/og-image.png">
+<meta name="twitter:image:alt" content="Kesh Muthu — portfolio">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kesh Muthu",
+  "alternateName": "Ukeshwaran Muthu",
+  "url": "https://keshm2.github.io/",
+  "image": "https://keshm2.github.io/og-image.png",
+  "email": "mailto:keshm@uw.edu",
+  "jobTitle": "Cloud, Networking & Security Engineer",
+  "description": "University of Washington Informatics senior focused on cloud infrastructure, network engineering, and cybersecurity, plus backend, QA, and IT/systems work.",
+  "knowsAbout": ["Cloud Infrastructure", "Network Engineering", "Cybersecurity", "Backend Development", "Quality Assurance", "Python", "TypeScript", "Rust"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Seattle",
+    "addressRegion": "WA",
+    "addressCountry": "US"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Washington"
+  },
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "certification",
+    "name": "Cisco Certified Network Associate (CCNA)"
+  },
+  "sameAs": [
+    "https://github.com/keshm2",
+    "https://linkedin.com/in/ukeshwaran"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What kind of roles are you looking for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2026/2027 internships and 2027 new-grad roles in cloud infrastructure, network engineering, cybersecurity, backend, QA, or IT/systems. I'm based in Seattle and open to relocating."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are you based?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Seattle, Washington. I'm a senior at the University of Washington studying Informatics with a minor in Data Science."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What certifications do you hold?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I've earned the Cisco Certified Network Associate (CCNA) and I'm currently working toward CompTIA Security+."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How soon do you respond?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Email is the fastest way to reach me and I reply within one business day."
+      }
+    }
+  ]
+}
+</script>
 <style>
   :root {
     --ground: #0e1110;
@@ -76,6 +182,21 @@
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 0.5rem 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    z-index: 100;
+  }
+  .skip-link:focus { left: 1rem; top: 1rem; }
 
   .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.5rem; }
 
@@ -180,7 +301,7 @@
   #typed.typing { border-right-color: var(--accent); }
   .prompt { color: var(--accent); margin-right: 0.4rem; }
 
-  .cta-row { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+  .cta-row { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; }
   .btn {
     font-family: var(--mono);
     font-size: 0.85rem;
@@ -198,6 +319,7 @@
   .btn:active { transform: scale(0.97); }
   .btn:hover { border-color: var(--accent-dim); }
   .btn.primary { border-color: var(--accent); color: var(--accent); }
+  .cta-note { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
 
   /* ---- sections ---- */
   section { padding: 3.2rem 0; border-top: 1px solid var(--border); }
@@ -266,6 +388,8 @@
   .status .sdot { width: 5px; height: 5px; border-radius: 50%; background: var(--ok); }
 
   .card p.desc { margin: 0 0 0.9rem; color: var(--muted); font-size: 0.94rem; }
+  .card p.outcome { margin: 0 0 0.9rem; color: var(--text); font-size: 0.9rem; font-family: var(--mono); }
+  .card p.outcome .k { color: var(--accent); }
   .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.9rem; }
   .tag {
     font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
@@ -296,6 +420,31 @@
   .cert-earned { color: var(--ok); }
   .cert-progress { color: var(--paused); }
 
+  /* ---- faq ---- */
+  .faq details {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 0 1.1rem;
+    margin-bottom: 0.7rem;
+  }
+  .faq summary {
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    padding: 0.95rem 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: var(--accent); font-size: 1.1rem; }
+  .faq details[open] summary::after { content: "\2212"; }
+  .faq details[open] summary { border-bottom: 1px solid var(--border); }
+  .faq .faq-body { padding: 0.9rem 0; color: var(--muted); max-width: 60ch; font-size: 0.94rem; }
+
   /* ---- contact ---- */
   .contact-row { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.2rem; }
   .copy-btn {
@@ -311,36 +460,79 @@
   .copy-btn.copied .swap.default { display: none; }
   .copy-btn .swap.confirm { display: none; color: var(--ok); }
   .copy-btn.copied .swap.confirm { display: inline-block; }
+  .response-promise {
+    font-family: var(--mono); font-size: 0.8rem; color: var(--muted);
+    margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .response-promise .sdot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); flex: none; }
 
   footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--border); }
   footer p { color: var(--muted); font-size: 0.85rem; font-family: var(--mono); }
-</style>
+  footer .foot-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  footer .foot-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; }
+  footer .foot-links a:hover { color: var(--text); }
 
-<div class="statusbar">
+  /* ---- sticky mobile CTA ---- */
+  .mobile-cta {
+    display: none;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 40;
+    padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--ground) 92%, var(--surface));
+    border-top: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+  .mobile-cta a {
+    display: block;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 0.7rem 1rem;
+    background: var(--surface);
+  }
+  @media (max-width: 640px) {
+    .mobile-cta { display: block; }
+    footer { padding-bottom: 6rem; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="statusbar">
   <div class="wrap statusbar-inner">
     <div class="statusbar-left">
-      <span>kesh://portfolio</span><span class="cursor"></span>
-      <span class="pill"><span class="dot"></span>open to 2026/27 internships</span>
+      <span>kesh://portfolio</span><span class="cursor" aria-hidden="true"></span>
+      <span class="pill"><span class="dot" aria-hidden="true"></span>open to 2026/27 internships</span>
     </div>
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       <a href="#work">work</a>
       <a href="#stack">stack</a>
+      <a href="#faq">faq</a>
       <a href="#contact">contact</a>
     </nav>
     <button class="theme-toggle" id="themeToggle" type="button">theme: auto</button>
   </div>
-</div>
+</header>
 
 <div class="wrap">
+<main id="main">
 
   <section class="hero" aria-label="Introduction">
-    <span class="eyebrow">~/kesh · uw informatics, senior</span>
+    <span class="eyebrow">~/kesh · uw informatics, senior · seattle, wa</span>
     <h1>I build what I actually needed.</h1>
-    <p class="hero-line"><span class="prompt">$ whoami →</span><span id="typed"></span></p>
+    <p class="hero-line"><span class="prompt">$ whoami &rarr;</span><span id="typed"></span></p>
     <div class="cta-row">
-      <a class="btn primary" href="mailto:keshm@uw.edu">email</a>
+      <a class="btn primary" href="mailto:keshm@uw.edu?subject=Hi%20Kesh">email me</a>
       <a class="btn" href="https://linkedin.com/in/ukeshwaran" target="_blank" rel="noopener">linkedin</a>
       <a class="btn" href="https://github.com/keshm2" target="_blank" rel="noopener">github</a>
+      <span class="cta-note">replies within one business day</span>
     </div>
   </section>
 
@@ -357,7 +549,7 @@
 
   <section id="work" aria-label="Featured work">
     <div class="section-head">
-      <h2><span class="idx">02</span>featured work</h2>
+      <h2><span class="idx">02</span>featured work &amp; case studies</h2>
       <div class="trace" data-reveal></div>
     </div>
     <div class="grid">
@@ -365,72 +557,74 @@
       <article class="card span-2" data-reveal>
         <div class="card-top">
           <h3 class="card-title">aplyx</h3>
-          <span class="status"><span class="sdot"></span>active</span>
+          <span class="status"><span class="sdot" aria-hidden="true"></span>active</span>
         </div>
         <p class="desc">A local-first job application agent that runs on top of a coding agent you already have installed (opencode or Claude Code get full capability). It searches boards like Ashby, Lever, Greenhouse, and Workday, skips anything already seen, tailors a resume and cover letter per posting, applies, pings Discord with the outcome, and logs every success to a Google Sheet. aplyx is the workflow; the agent is the executor.</p>
+        <p class="outcome"><span class="k">problem</span> &rarr; pasting the same resume into every portal by hand. <span class="k">approach</span> &rarr; deterministic Python helpers own all state; the LLM only orchestrates. <span class="k">result</span> &rarr; hands-off applications across four ATS families with a fail-closed safety model on submit.</p>
         <div class="tags">
           <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Rust</span><span class="tag">PostgreSQL</span>
         </div>
-        <a class="card-link" href="https://github.com/keshm2/aplyx" target="_blank" rel="noopener">→ view source</a>
+        <a class="card-link" href="https://github.com/keshm2/aplyx" target="_blank" rel="noopener">&rarr; view source</a>
       </article>
 
       <article class="card span-2" data-reveal>
         <div class="card-top">
           <h3 class="card-title">UW KTP</h3>
-          <span class="status"><span class="sdot"></span>active</span>
+          <span class="status"><span class="sdot" aria-hidden="true"></span>active</span>
         </div>
         <p class="desc">The chapter-management platform for Kappa Theta Pi's UW chapter, recently transferred into the chapter's own GitHub org to become its actual system of record. A public rush site, a member portal, and an admin console, with the goal of automating due collection through Stripe (or another processor), tracking attendance to push it up, budgeting the year automatically from what actually gets collected, and keeping member points and absences in one place instead of a spreadsheet. Currently a working front-end demo with mock data and a Stripe-style mock checkout. The real backend is next.</p>
+        <p class="outcome"><span class="k">problem</span> &rarr; dues, points, and attendance scattered across spreadsheets. <span class="k">approach</span> &rarr; one system of record with role-scoped portals. <span class="k">result</span> &rarr; adopted by the chapter; front-end demo live, backend in progress.</p>
         <div class="tags">
           <span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span>
         </div>
-        <a class="card-link" href="https://github.com/UW-KTP/peaka-theta-pi" target="_blank" rel="noopener">→ view source</a>
-        &nbsp;&nbsp;<a class="card-link" href="https://uw-ktp.github.io/peaka-theta-pi/" target="_blank" rel="noopener">→ live demo</a>
+        <a class="card-link" href="https://github.com/UW-KTP/peaka-theta-pi" target="_blank" rel="noopener">&rarr; view source</a>
+        &nbsp;&nbsp;<a class="card-link" href="https://uw-ktp.github.io/peaka-theta-pi/" target="_blank" rel="noopener">&rarr; live demo</a>
       </article>
 
       <article class="card" data-reveal>
         <div class="card-top">
           <h3 class="card-title">kyper</h3>
-          <span class="status"><span class="sdot"></span>maintained</span>
+          <span class="status"><span class="sdot" aria-hidden="true"></span>maintained</span>
         </div>
         <p class="desc">Started as messing around with Llama 3, Ollama, and document embeddings. Now it's how I ask questions about my own PDFs instead of scrolling through them. Runs fully offline, nothing leaves the machine.</p>
         <div class="tags">
           <span class="tag">Python</span><span class="tag">Ollama</span><span class="tag">RAG</span>
         </div>
-        <a class="card-link" href="https://github.com/keshm2/kyper" target="_blank" rel="noopener">→ view source</a>
+        <a class="card-link" href="https://github.com/keshm2/kyper" target="_blank" rel="noopener">&rarr; view source</a>
       </article>
 
       <article class="card" data-reveal>
         <div class="card-top">
           <h3 class="card-title">HusKey Manager</h3>
-          <span class="status"><span class="sdot"></span>maintained</span>
+          <span class="status"><span class="sdot" aria-hidden="true"></span>maintained</span>
         </div>
         <p class="desc">A team password vault built for UW's INFO 310 cybersecurity course, with intentionally vulnerable code so students can find and fix real security bugs in authentication, role permissions, and access control.</p>
         <div class="tags">
           <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Docker</span>
         </div>
-        <a class="card-link" href="https://github.com/keshm2/passwordmanager" target="_blank" rel="noopener">→ view source</a>
+        <a class="card-link" href="https://github.com/keshm2/passwordmanager" target="_blank" rel="noopener">&rarr; view source</a>
       </article>
 
       <article class="card" data-reveal>
         <div class="card-top">
           <h3 class="card-title">bots</h3>
-          <span class="status"><span class="sdot"></span>active</span>
+          <span class="status"><span class="sdot" aria-hidden="true"></span>active</span>
         </div>
         <p class="desc">General-purpose Discord bots, korrupt and pika among them, for moderation commands and music playback in voice channels.</p>
         <div class="tags">
           <span class="tag">Python</span><span class="tag">Discord API</span><span class="tag">SQLite</span>
         </div>
-        <a class="card-link" href="https://github.com/keshm2/bots" target="_blank" rel="noopener">→ view source</a>
+        <a class="card-link" href="https://github.com/keshm2/bots" target="_blank" rel="noopener">&rarr; view source</a>
       </article>
 
       <article class="card" data-reveal>
         <div class="card-top">
           <h3 class="card-title">ben</h3>
-          <span class="status"><span class="sdot"></span>active · 50 users</span>
+          <span class="status"><span class="sdot" aria-hidden="true"></span>active · 50 users</span>
         </div>
         <p class="desc">Kept separate from the general-purpose bots because it does one real job: chore reminders, in daily use by about 50 students.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">Discord API</span></div>
-        <a class="card-link" href="https://github.com/keshm2/bots" target="_blank" rel="noopener">→ view source</a>
+        <a class="card-link" href="https://github.com/keshm2/bots" target="_blank" rel="noopener">&rarr; view source</a>
       </article>
 
     </div>
@@ -452,26 +646,65 @@
     </div>
   </section>
 
+  <section id="faq" class="faq" aria-label="Frequently asked questions">
+    <div class="section-head">
+      <h2><span class="idx">04</span>faq</h2>
+      <div class="trace" data-reveal></div>
+    </div>
+
+    <details>
+      <summary>What kind of roles are you looking for?</summary>
+      <div class="faq-body">2026/2027 internships and 2027 new-grad roles in cloud infrastructure, network engineering, cybersecurity, backend, QA, or IT/systems. I'm based in Seattle and open to relocating.</div>
+    </details>
+    <details>
+      <summary>Where are you based?</summary>
+      <div class="faq-body">Seattle, Washington. I'm a senior at the University of Washington studying Informatics with a minor in Data Science.</div>
+    </details>
+    <details>
+      <summary>What certifications do you hold?</summary>
+      <div class="faq-body">I've earned the Cisco Certified Network Associate (CCNA) and I'm currently working toward CompTIA Security+.</div>
+    </details>
+    <details>
+      <summary>How soon do you respond?</summary>
+      <div class="faq-body">Email is the fastest way to reach me and I reply within one business day.</div>
+    </details>
+  </section>
+
   <section id="contact" aria-label="Contact">
     <div class="section-head">
-      <h2><span class="idx">04</span>contact</h2>
+      <h2><span class="idx">05</span>contact</h2>
       <div class="trace" data-reveal></div>
     </div>
     <p class="muted" style="max-width:52ch">If you're hiring, or just want to connect and network, please reach out. Best way is email :)</p>
     <div class="contact-row">
-      <a class="copy-btn" id="copyEmail" href="mailto:keshm@uw.edu">
+      <a class="copy-btn" id="copyEmail" href="mailto:keshm@uw.edu?subject=Hi%20Kesh">
         <span class="swap default">keshm@uw.edu · copy</span>
         <span class="swap confirm">copied ✓</span>
       </a>
       <a class="btn" href="https://linkedin.com/in/ukeshwaran" target="_blank" rel="noopener">linkedin ↗</a>
       <a class="btn" href="https://github.com/keshm2" target="_blank" rel="noopener">github ↗</a>
     </div>
+    <p class="response-promise"><span class="sdot" aria-hidden="true"></span>I read every message and reply within one business day.</p>
   </section>
 
+</main>
+
   <footer>
-    <p>kesh · built by hand, not a template</p>
+    <div class="foot-links">
+      <a href="/">home</a>
+      <a href="#work">work</a>
+      <a href="#faq">faq</a>
+      <a href="/privacy.html">privacy</a>
+      <a href="/llms.txt">llms.txt</a>
+      <a href="https://github.com/keshm2" target="_blank" rel="noopener">github ↗</a>
+    </div>
+    <p>kesh · built by hand, not a template · <span id="year">2026</span></p>
   </footer>
 
+</div>
+
+<div class="mobile-cta">
+  <a href="mailto:keshm@uw.edu?subject=Hi%20Kesh">email me &rarr; replies within one business day</a>
 </div>
 
 <script>
@@ -481,13 +714,19 @@
   // theme toggle
   var root = document.documentElement;
   var btn = document.getElementById('themeToggle');
-  var stored = localStorage.getItem('theme');
+  var stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (e) {}
   if (stored) { root.setAttribute('data-theme', stored); btn.textContent = 'theme: ' + stored; }
   btn.addEventListener('click', function () {
     var current = root.getAttribute('data-theme');
     var next = current === 'dark' ? 'light' : current === 'light' ? null : 'dark';
-    if (next) { root.setAttribute('data-theme', next); localStorage.setItem('theme', next); btn.textContent = 'theme: ' + next; }
-    else { root.removeAttribute('data-theme'); localStorage.removeItem('theme'); btn.textContent = 'theme: auto'; }
+    try {
+      if (next) { root.setAttribute('data-theme', next); localStorage.setItem('theme', next); btn.textContent = 'theme: ' + next; }
+      else { root.removeAttribute('data-theme'); localStorage.removeItem('theme'); btn.textContent = 'theme: auto'; }
+    } catch (e) {
+      if (next) { root.setAttribute('data-theme', next); btn.textContent = 'theme: ' + next; }
+      else { root.removeAttribute('data-theme'); btn.textContent = 'theme: auto'; }
+    }
   });
 
   // typed hero line
@@ -534,5 +773,12 @@
       setTimeout(function () { copyBtn.classList.remove('copied'); }, 1600);
     }).catch(function () {});
   });
+
+  // footer year
+  var y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
 })();
 </script>
+
+</body>
+</html>

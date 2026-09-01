@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Kesh Muthu">
+  <rect width="64" height="64" rx="14" fill="#0e1110"/>
+  <text x="32" y="33" text-anchor="middle" dominant-baseline="central"
+        font-family="ui-monospace, Menlo, Consolas, monospace" font-size="34"
+        font-weight="700" fill="#c98a4b">k</text>
+  <rect x="16" y="46" width="20" height="4" rx="2" fill="#c98a4b"/>
+</svg>

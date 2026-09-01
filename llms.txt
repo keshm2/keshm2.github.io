@@ -1,0 +1,52 @@
+# Kesh Muthu
+
+> University of Washington Informatics senior (Seattle, WA) focused on cloud
+> infrastructure, network engineering, and cybersecurity, plus backend, QA,
+> and IT/systems work. Builder of aplyx. Open to 2026/2027 internships and
+> 2027 new-grad roles.
+
+Contact: keshm@uw.edu (replies within one business day)
+Site: https://keshm2.github.io/
+GitHub: https://github.com/keshm2
+LinkedIn: https://linkedin.com/in/ukeshwaran
+
+## Background
+
+- Senior, B.S. Informatics, University of Washington; minor in Data Science.
+- Helps run the technical side of UW's Kappa Theta Pi chapter.
+- Certifications: CCNA (earned), CompTIA Security+ (in progress).
+
+## Focus areas
+
+- Cloud infrastructure
+- Network engineering (TCP/IP, routing & switching, subnetting, DNS/DHCP, Wireshark)
+- Cybersecurity (OWASP Top 10, RBAC, authentication and access control)
+- Backend development, QA, IT/systems
+
+## Projects
+
+- aplyx (https://github.com/keshm2/aplyx): Local-first job-application agent
+  that runs on top of an existing coding agent. Searches Ashby, Lever,
+  Greenhouse, and Workday, dedupes against history, tailors a resume and cover
+  letter per posting, applies, and reports outcomes to Discord and a Google
+  Sheet. Python/TypeScript/React/Rust/PostgreSQL. Deterministic helpers own all
+  state; the LLM only orchestrates; fail-closed on submit.
+- UW KTP (https://github.com/UW-KTP/peaka-theta-pi): Chapter-management
+  platform for UW's Kappa Theta Pi. Public rush site, member portal, admin
+  console; dues via Stripe, attendance, points, and budgeting in one system of
+  record. Next.js/React/TypeScript/Tailwind. Front-end demo live, backend next.
+- kyper (https://github.com/keshm2/kyper): Fully offline RAG tool for asking
+  questions about local PDFs. Python/Ollama/Llama 3/embeddings.
+- HusKey Manager (https://github.com/keshm2/passwordmanager): Team password
+  vault built for UW INFO 310 with intentionally vulnerable code for teaching
+  auth, role permissions, and access-control bugs. PHP/MySQL/Docker.
+- bots (https://github.com/keshm2/bots): General-purpose Discord bots for
+  moderation and music. Python/Discord API/SQLite.
+- ben: Discord chore-reminder bot in daily use by ~50 students. Python/Discord API.
+
+## Tech
+
+- Languages: Python, TypeScript, JavaScript, Rust, C++, PHP, R
+- Frameworks & data: React, Flask, PostgreSQL, MySQL, SQLite, REST APIs
+- AI/ML: Ollama, Jupyter, RAG
+- Tools: Git, Docker, Linux, Playwright, VS Code
