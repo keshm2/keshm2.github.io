@@ -1,4 +1,4 @@
-# Kesh Muthu
+# Ukeshwaran Muthukumaran Radha (Kesh Muthu)
 
 > University of Washington Informatics senior (Seattle, WA) focused on cloud
 > infrastructure, network engineering, and cybersecurity, plus backend, QA,
@@ -6,7 +6,7 @@
 > 2027 new-grad roles.
 
 Contact: keshm@uw.edu (replies within one business day)
-Site: https://keshm2.github.io/
+Site: https://keshm.me/
 GitHub: https://github.com/keshm2
 LinkedIn: https://linkedin.com/in/ukeshwaran
 
@@ -23,30 +23,22 @@ LinkedIn: https://linkedin.com/in/ukeshwaran
 - Cybersecurity (OWASP Top 10, RBAC, authentication and access control)
 - Backend development, QA, IT/systems
 
+## Experience
+
+- KredosAI, software engineering intern (2025, 2026): FastAPI and vLLM services for voice AI agents, LLM fine-tuning, RAG pipelines.
+- Apexiel, software engineering intern (2024): semantic search API and Qdrant ingestion pipeline.
+
 ## Projects
 
-- aplyx (https://github.com/keshm2/aplyx): Local-first job-application agent
-  that runs on top of an existing coding agent. Searches Ashby, Lever,
-  Greenhouse, and Workday, dedupes against history, tailors a resume and cover
-  letter per posting, applies, and reports outcomes to Discord and a Google
-  Sheet. Python/TypeScript/React/Rust/PostgreSQL. Deterministic helpers own all
-  state; the LLM only orchestrates; fail-closed on submit.
-- UW KTP (https://github.com/UW-KTP/peaka-theta-pi): Chapter-management
-  platform for UW's Kappa Theta Pi. Public rush site, member portal, admin
-  console; dues via Stripe, attendance, points, and budgeting in one system of
-  record. Next.js/React/TypeScript/Tailwind. Front-end demo live, backend next.
-- kyper (https://github.com/keshm2/kyper): Fully offline RAG tool for asking
-  questions about local PDFs. Python/Ollama/Llama 3/embeddings.
-- HusKey Manager (https://github.com/keshm2/passwordmanager): Team password
-  vault built for UW INFO 310 with intentionally vulnerable code for teaching
-  auth, role permissions, and access-control bugs. PHP/MySQL/Docker.
-- bots (https://github.com/keshm2/bots): General-purpose Discord bots for
-  moderation and music. Python/Discord API/SQLite.
-- ben: Discord chore-reminder bot in daily use by ~50 students. Python/Discord API.
+- Ripprz (https://ripprz.com): Pokemon card trading app, team of five. TypeScript/Next.js/PostgreSQL/Redis/Stripe. Fixed three Stripe payout race conditions; cut inventory allocation from 10s to 13ms.
+- Kappa Theta Pi member platform (https://ktpuw.org): chapter site and member portal for ~50 members. Next.js/Supabase/Stripe. Dues, event turnout up 50%, row-level security.
+- aplyx (https://github.com/keshm2/aplyx): job-application agent that runs on an existing coding agent. Searches Ashby, Lever, Greenhouse, Workday; tailors resume and cover letter; applies; reports to Discord. Read-only MCP server, Redis caching (7s to under 500ms).
+- Cisco school network deployment: led a team of five, 8 schools, OSPF, VLANs, DHCP.
+- Smaller: kyper (offline PDF Q&A, https://github.com/keshm2/kyper), HusKey Manager (https://github.com/keshm2/passwordmanager), Discord bots (https://github.com/keshm2/bots).
 
 ## Tech
 
-- Languages: Python, TypeScript, JavaScript, Rust, C++, PHP, R
-- Frameworks & data: React, Flask, PostgreSQL, MySQL, SQLite, REST APIs
-- AI/ML: Ollama, Jupyter, RAG
-- Tools: Git, Docker, Linux, Playwright, VS Code
+- Languages: Python, TypeScript, JavaScript, Java, SQL, C++, Rust, PHP, R, Go (learning)
+- AI: vLLM, LoRA/QLoRA, RAG, embeddings, MCP, Qdrant, Ollama
+- Backend: FastAPI, Node.js, Next.js, React, PostgreSQL, Redis, Supabase, Docker, AWS, Linux
+- Tools: Git, GitHub Actions, Playwright
